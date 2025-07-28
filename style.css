@@ -1,4 +1,5 @@
 body {
+<<<<<<< HEAD
   font-family: Arial, sans-serif;
   background-color: #f5f7fa;
   display: flex;
@@ -63,3 +64,26 @@ h1 {
 
   
   
+=======
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f0f8ff;
+    padding-top: 40px;
+  }
+  
+  .converter {
+    display: inline-block;
+    padding: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  select, input {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  
+>>>>>>> 2cc519d6d8ec4d2454f0321ff4bf607388d06034
