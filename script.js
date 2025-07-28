@@ -1,84 +1,55 @@
-// DOM elements
-const fromCurrency = document.getElementById("from");
-const toCurrency = document.getElementById("to");
+const apiKey = "YOUR_ACCESS_KEY"; // <-- Replace this
+const apiUrl = `https://api.exchangerate.host/latest`;
+
+const fromCurrency = document.getElementById("from-currency");
+const toCurrency = document.getElementById("to-currency");
 const amountInput = document.getElementById("amount");
 const convertBtn = document.getElementById("convert");
-const result = document.getElementById("result");
+const resultDisplay = document.getElementById("result");
 
-// Optional chart elements
-const chartContainer = document.getElementById("chart-container");
+// Fetch available currencies and populate dropdowns
+fetch("https://api.exchangerate.host/symbols")
+  .then(res => res.json())
+  .then(data => {
+    const symbols = data.symbols;
+    for (let code in symbols) {
+      const option1 = document.createElement("option");
+      const option2 = document.createElement("option");
+      option1.value = option2.value = code;
+      option1.text = option2.text = `${code} - ${symbols[code].description}`;
+      fromCurrency.appendChild(option1);
+      toCurrency.appendChild(option2);
+    }
 
+    // Set defaults
+    fromCurrency.value = "USD";
+    toCurrency.value = "EUR";
+  });
+
+// Convert on button click
 convertBtn.addEventListener("click", () => {
+  const amount = parseFloat(amountInput.value);
   const from = fromCurrency.value;
   const to = toCurrency.value;
-  const amount = amountInput.value;
 
-  if (!amount || isNaN(amount)) {
-    result.innerText = "Please enter a valid amount.";
+  if (!amount || amount <= 0) {
+    resultDisplay.textContent = "Please enter a valid amount.";
     return;
   }
 
-  const url = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`;
-
-  fetch(url)
-    .then(response => response.json())
+  fetch(`${apiUrl}?base=${from}&symbols=${to}`)
+    .then(res => res.json())
     .then(data => {
-      if (data.success) {
-        const converted = data.result.toFixed(2);
-        result.innerText = `${amount} ${from} = ${converted} ${to}`;
-        showChart(from, to); // Optional chart
-      } else {
-        result.innerText = "Conversion failed. Please try again.";
-      }
+      const rate = data.rates[to];
+      const converted = (amount * rate).toFixed(2);
+      resultDisplay.textContent = `${amount} ${from} = ${converted} ${to}`;
     })
-    .catch(error => {
-      console.error(error);
-      result.innerText = "Error fetching data.";
+    .catch(err => {
+      resultDisplay.textContent = "Error fetching exchange rate.";
+      console.error(err);
     });
 });
 
-function showChart(from, to) {
-  const today = new Date();
-  const endDate = today.toISOString().split("T")[0];
-  const past = new Date(today.setDate(today.getDate() - 7));
-  const startDate = past.toISOString().split("T")[0];
-
-  const url = `https://api.exchangerate.host/timeseries?start_date=${startDate}&end_date=${endDate}&base=${from}&symbols=${to}`;
-
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      const labels = Object.keys(data.rates);
-      const values = labels.map(date => data.rates[date][to]);
-
-      renderChart(labels, values, `${from} to ${to}`);
-    });
-}
-
-function renderChart(labels, data, label) {
-  if (window.myChart) window.myChart.destroy(); // Reset chart if it exists
-
-  const ctx = document.getElementById("chart").getContext("2d");
-  window.myChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: labels,
-      datasets: [{
-        label: label,
-        data: data,
-        borderColor: "blue",
-        fill: false,
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: { display: true, title: { display: true, text: 'Date' } },
-        y: { display: true, title: { display: true, text: 'Rate' } }
-      }
-    }
-  });
-}
 
 
 
