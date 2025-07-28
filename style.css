@@ -1,22 +1,65 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #f0f8ff;
-    padding-top: 40px;
-  }
-  
-  .converter {
-    display: inline-block;
-    padding: 30px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-  
-  select, input {
-    margin: 10px;
-    padding: 10px;
-    font-size: 16px;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.converter input,
+.converter select {
+  padding: 10px;
+  margin: 10px 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.converter button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.converter button:hover {
+  background-color: #45a049;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.dropdowns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdowns span {
+  margin: 0 10px;
+  font-size: 18px;
+}
+
   
   

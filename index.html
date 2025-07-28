@@ -7,17 +7,23 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="converter">
+  <div class="container">
     <h1>Currency Converter</h1>
-    <input type="number" id="amount" placeholder="Enter amount" />
-    <select id="from-currency"></select>
-    <select id="to-currency"></select>
-    <button onclick="convertCurrency()">Convert</button>
-    <div id="result"></div>
+    <div class="converter">
+      <input type="number" id="amount" placeholder="Enter amount" />
+      <div class="dropdowns">
+        <select id="fromCurrency"></select>
+        <span>→</span>
+        <select id="toCurrency"></select>
+      </div>
+      <button onclick="convertCurrency()">Convert</button>
+      <div id="result"></div>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
