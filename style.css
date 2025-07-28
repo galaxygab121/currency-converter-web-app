@@ -1,70 +1,22 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f0f4f8;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .converter-container {
-    background: #fff;
-    padding: 2rem 3rem;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background: #f0f8ff;
+    padding-top: 40px;
   }
   
-  h1 {
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
+  .converter {
+    display: inline-block;
+    padding: 30px;
+    background: white;
     border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
   
-  .dropdown-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  select {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-  
-  button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background: #0056b3;
-  }
-  
-  #result {
-    margin-top: 1rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #222;
+  select, input {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
   }
   
   
