@@ -1,25 +1,28 @@
-const fromCurrency = document.getElementById("from-currency");
-const toCurrency = document.getElementById("to-currency");
-const result = document.getElementById("result");
+const apiKey = 'https://api.exchangerate.host/latest';
 
-fetch("https://api.exchangerate.host/symbols")
-  .then(res => res.json())
-  .then(data => {
-    const symbols = Object.keys(data.symbols);
-    symbols.forEach(symbol => {
-      fromCurrency.innerHTML += `<option value="${symbol}">${symbol}</option>`;
-      toCurrency.innerHTML += `<option value="${symbol}">${symbol}</option>`;
-    });
-  });
+async function convertCurrency() {
+  const amount = parseFloat(document.getElementById('amount').value);
+  const from = document.getElementById('fromCurrency').value;
+  const to = document.getElementById('toCurrency').value;
 
-function convertCurrency() {
-  const amount = document.getElementById("amount").value;
-  const from = fromCurrency.value;
-  const to = toCurrency.value;
+  if (isNaN(amount)) {
+    alert('Please enter a valid amount.');
+    return;
+  }
 
-  fetch(`https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`)
-    .then(res => res.json())
-    .then(data => {
-      result.innerText = `${amount} ${from} = ${data.result.toFixed(2)} ${to}`;
-    });
+  try {
+    const response = await fetch(`${apiKey}?base=${from}&symbols=${to}`);
+    const data = await response.json();
+
+    const rate = data.rates[to];
+    const converted = (amount * rate).toFixed(2);
+
+    document.getElementById('result').innerText =
+      `${amount} ${from} = ${converted} ${to}`;
+  } catch (error) {
+    console.error('Error fetching exchange rate:', error);
+    alert('Something went wrong. Try again later.');
+  }
 }
+
+
